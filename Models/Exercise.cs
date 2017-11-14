@@ -1,6 +1,9 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FitnessBoys.Model
+namespace ITWEB6.Models
 {
     public class Exercise
     {
@@ -11,6 +14,6 @@ namespace FitnessBoys.Model
         public int Sets { get; set; }
         public bool IsRepetition { get; set; }
         public double Time { get; set; }
-        public List<Program> Programs { get; set; }
+        public List<ProgramExercise> ProgramExercises { get; set; }
     }
 }
