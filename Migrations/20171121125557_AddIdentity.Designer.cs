@@ -12,9 +12,10 @@ using System;
 namespace ITWEB6.Migrations
 {
     [DbContext(typeof(FitnessBoysContext))]
-    partial class FitnessBoysContextModelSnapshot : ModelSnapshot
+    [Migration("20171121125557_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

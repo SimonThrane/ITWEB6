@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ITWEB6.Models
 {
-    public class FitnessBoysContext : DbContext
+    public class FitnessBoysContext : IdentityDbContext
     {
 
         public FitnessBoysContext(DbContextOptions<FitnessBoysContext> options)
@@ -24,11 +25,11 @@ namespace ITWEB6.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Activity>().ToTable("Activity");
             modelBuilder.Entity<Exercise>().ToTable("Exercise");
             modelBuilder.Entity<Program>().ToTable("Program");
             modelBuilder.Entity<ProgramExercise>().ToTable("ProgramExercise");
-
 
             modelBuilder.Entity<Activity>()
                 .HasKey(a => a.Id);
@@ -38,6 +39,11 @@ namespace ITWEB6.Models
 
             modelBuilder.Entity<Program>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Program>()
+                .HasOne(p => p.ApplicationUser)
+                .WithMany(a => a.Programs)
+                .HasForeignKey(p => p.ApplicationUserId);
 
             modelBuilder.Entity<ProgramExercise>()
                 .HasKey(pe => new {pe.ExerciseId, pe.ProgramId});

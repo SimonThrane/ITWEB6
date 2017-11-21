@@ -12,5 +12,7 @@ namespace ITWEB6.Models
         public List<ProgramExercise> ProgramExercises { get; set; }
         public string Creater { get; set; }
         public DateTime CreateDate { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
     }
 }
