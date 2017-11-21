@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ITWEB6.Models
 {
-    public class FitnessBoysContext : DbContext
+    public class FitnessBoysContext : IdentityDbContext
     {
 
         public FitnessBoysContext(DbContextOptions<FitnessBoysContext> options)

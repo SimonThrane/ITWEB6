@@ -1,0 +1,23 @@
+<nav>
+  <ul class="nav nav-tabs flex-column">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/programs" routerLinkActive="active">Programs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/exercises" routerLinkActive="active">Exercises</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn">
+      <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn">
+      <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+    </li>
+    <li *ngIf="isLoggedIn" class="nav-item">
+      <a class="nav-link" routerLink="/logactivity" routerLinkActive="active">Log Activity</a>
+    </li>
+  </ul>
+  <div *ngIf="isLoggedIn">
+    <p>{{currentUser}}</p>
+    <button (click)="logout()" style="cursor: pointer;" class="btn btn-primary">Logout</button>
+  </div>
+</nav>
