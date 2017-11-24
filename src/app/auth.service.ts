@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   public login(user: any): void {
-    const url = `${this.baseUrl}auth/login`;
+    const url = `${this.baseUrl}Account/login`;
     this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
       this.router.navigateByUrl('/programs');
@@ -45,7 +45,7 @@ export class AuthService {
   };
 
   public register(user: User): boolean {
-      const url = `${this.baseUrl}auth/register`;
+    const url = `${this.baseUrl}Account/Register`;
       this.http.post<AuthResponse>(url, user).subscribe(data => {
       this.saveToken(data.token);
       this.router.navigateByUrl('/programs');
