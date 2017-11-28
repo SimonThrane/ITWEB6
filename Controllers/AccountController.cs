@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -44,9 +44,16 @@ namespace ITWEB6.Controllers
             }
             var passwordSignInResult = await _signInManager.CheckPasswordSignInAsync(user,
                 userDto.Password, false);
-            if (passwordSignInResult.Succeeded)
-                return new ObjectResult(GenerateToken(userDto.Email));
-            return BadRequest("Invalid login");
+          if (passwordSignInResult.Succeeded)
+          {
+              var result = new
+              {
+                token = GenerateToken(userDto.Email)
+              };
+            return new ObjectResult(result);
+
+          }
+      return BadRequest("Invalid login");
         }
 
         [HttpPost("Register")]
@@ -60,7 +67,11 @@ namespace ITWEB6.Controllers
             var userCreationResult = await _userManager.CreateAsync(newUser, userDto.Password);
             if (userCreationResult.Succeeded)
             {
-                return new ObjectResult(GenerateToken(userDto.Email));
+              var result = new
+              {
+                token = GenerateToken(userDto.Email)
+              };
+                return new ObjectResult(result);
             }
             foreach (var error in userCreationResult.Errors)
                 ModelState.AddModelError(string.Empty, error.Description);
