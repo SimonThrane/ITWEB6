@@ -38,10 +38,10 @@ export class SingleProgramComponent implements OnInit, OnDestroy {
 
     addExerciseToProgram(exercise: Exercise) {
       let mappedProgram = JSON.parse(JSON.stringify(this.program));
-        mappedProgram.exercises = this.program.exercises.map((exercise) => exercise._id);
-        mappedProgram.exercises.push(String(exercise._id));
+        mappedProgram.exercises = this.program.exercises.map((exercise) => exercise.id);
+        mappedProgram.exercises.push(String(exercise.id));
         this.fitnessService.updateProgram(mappedProgram).subscribe(data => {
-          if(this.program.exercises.filter(e => e._id === exercise._id).length === 0) {
+          if(this.program.exercises.filter(e => e._id === exercise.id).length === 0) {
             this.program.exercises.push(exercise);
           }
         });

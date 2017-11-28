@@ -75,13 +75,13 @@ export class FitnessService {
   updateProgram(program: Program): Observable<any> {
     console.log(program);
     return this.http
-      .put(this.baseUrl + this.programsUrl + "/" + program._id.toString(), JSON.stringify(program), { headers: this.auhtHeader })
+      .put(this.baseUrl + this.programsUrl + "/" + program.id.toString(), JSON.stringify(program), { headers: this.auhtHeader })
       .first();
   }
 
   updateExercise(exercise: Exercise): Observable<Exercise> {
     return this.http
-      .put<Exercise>(this.baseUrl + this.exerciseUrl + "/" + exercise._id.toString(), JSON.stringify(exercise), { headers: this.headers })
+      .put<Exercise>(this.baseUrl + this.exerciseUrl + "/" + exercise.id.toString(), JSON.stringify(exercise), { headers: this.headers })
       .first();
   }
 

@@ -34,8 +34,8 @@ export class ProgramsComponent implements OnInit, OnDestroy {
   }
 
   deleteProgram(program) {
-    this.fitnessService.deleteProgram(program._id).subscribe(data => {
-      let index = this.programs.indexOf(program._id);
+    this.fitnessService.deleteProgram(program.id).subscribe(data => {
+      let index = this.programs.indexOf(program.id);
       this.programs.splice(index, 1);
     });
   }

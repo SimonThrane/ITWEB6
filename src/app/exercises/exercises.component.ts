@@ -32,8 +32,8 @@ export class ExercisesComponent implements OnInit {
   }
 
   deleteExercise(exercise) {
-    this.fitnessService.deleteExercise(exercise._id).subscribe(data => {
-      this.exercises = this.exercises.filter(e => e._id !== exercise._id);
+    this.fitnessService.deleteExercise(exercise.id).subscribe(data => {
+      this.exercises = this.exercises.filter(e => e.id !== exercise.id);
     });
   }
 
