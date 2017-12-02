@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ITWEB6;
+using ITWEB6.Dtos;
+using ITWEB6.Models;
 
 namespace ITWEB6.Controllers
 {
@@ -36,14 +38,44 @@ namespace ITWEB6.Controllers
                 return BadRequest(ModelState);
             }
 
-            var program = await _context.Programs.SingleOrDefaultAsync(m => m.Id == id);
+            var program = await _context.Programs
+              .Include(p => p.ProgramExercises)
+              .ThenInclude(pe => pe.Exercise)
+              .SingleOrDefaultAsync(m => m.Id == id);
 
-            if (program == null)
+          if (program == null)
+          {
+            return NotFound();
+          }
+
+      //map to DTO
+      var programDto = new ProgramDto
+          {
+             Name = program.Name,
+             ApplicationUser = program.ApplicationUser,
+             ApplicationUserId = program.ApplicationUserId,
+             Id = program.Id,
+             Creater = program.Creater,
+             CreateDate = program.CreateDate,
+             Category = program.Category,
+             Exercises = new List<ExerciseDto>()
+          };
+
+          foreach (var pe in program.ProgramExercises)
+          {
+            programDto.Exercises.Add(new ExerciseDto
             {
-                return NotFound();
-            }
+              Id = pe.Exercise.Id,
+              Name = pe.Exercise.Name,
+              Sets = pe.Exercise.Sets,
+              Description = pe.Exercise.Description,
+              Time = pe.Exercise.Time,
+              IsRepetition = pe.Exercise.IsRepetition,
+              Repetitions = pe.Exercise.Repetitions
+            });
+          }
 
-            return Ok(program);
+            return Ok(programDto);
         }
 
         // PUT: api/Programs/5
