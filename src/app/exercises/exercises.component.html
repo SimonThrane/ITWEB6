@@ -33,7 +33,7 @@
       <input class="form-control" type="text" [(ngModel)]="exerciseAdd.sets" placeholder="sets">
     </div>
     <div class="col-md-2" *ngIf="exerciseAdd.isRepetition">
-      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.reps" placeholder="reps">
+      <input class="form-control" type="text" [(ngModel)]="exerciseAdd.repetitions" placeholder="reps">
     </div>
     <div class="col-md-2" *ngIf="!exerciseAdd.isRepetition">
       <input class="form-control" type="text" [(ngModel)]="exerciseAdd.time" placeholder="time">
@@ -56,7 +56,7 @@
           <p>{{exercise.isRepetition}}</p>
         </div>
       <div *ngIf="exercise.isRepetition" class="col-md-4">
-        <p>{{exercise.sets + " x " + exercise.reps}}</p>
+        <p>{{exercise.sets + " x " + exercise.repetitions}}</p>
       </div>
       <div *ngIf="!exercise.isRepetition" class="col-md-4">
         <p>{{exercise.time}}</p>
