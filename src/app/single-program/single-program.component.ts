@@ -25,6 +25,7 @@ export class SingleProgramComponent implements OnInit, OnDestroy {
       this.routingSubscription = this.route.params.subscribe(params => {
         this.programId = params.id;
         this.programSubscription = this.fitnessService.getProgram(this.programId).subscribe(program => {
+          //console.log(program);
           this.program = program;
         });
      });
@@ -38,10 +39,9 @@ export class SingleProgramComponent implements OnInit, OnDestroy {
 
     addExerciseToProgram(exercise: Exercise) {
       let mappedProgram = JSON.parse(JSON.stringify(this.program));
-        mappedProgram.exercises = this.program.exercises.map((exercise) => exercise.id);
-        mappedProgram.exercises.push(String(exercise.id));
+        mappedProgram.exercises = [exercise.id];
         this.fitnessService.updateProgram(mappedProgram).subscribe(data => {
-          if(this.program.exercises.filter(e => e._id === exercise.id).length === 0) {
+          if(this.program.exercises.filter(e => e.id === exercise.id).length === 0) {
             this.program.exercises.push(exercise);
           }
         });

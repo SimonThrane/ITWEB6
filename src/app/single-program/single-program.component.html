@@ -38,7 +38,7 @@
       <p>{{exercise.description}}</p>
     </div>
     <div *ngIf="exercise.isRepetition" class="col-md-4">
-      <p>{{exercise.sets + " x " + exercise.reps}}</p>
+      <p>{{exercise.sets + " x " + exercise.repetitions}}</p>
     </div>
     <div *ngIf="!exercise.isRepetition" class="col-md-4">
       <p>{{exercise.time}}</p>
