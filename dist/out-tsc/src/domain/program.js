@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Program = (function () {
-    function Program(_id, exercises, name, creater, create_date) {
-        this._id = _id;
+    function Program(id, exercises, name, creater, create_date) {
+        this.id = id;
         this.exercises = exercises;
         this.name = name;
         this.creater = creater;

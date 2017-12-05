@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Exercise = (function () {
-    function Exercise(_id, name, description, reps, sets, isRepetition, time) {
-        this._id = _id;
+    function Exercise(id, name, description, repetitions, sets, isRepetition, time) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.reps = reps;
+        this.repetitions = repetitions;
         this.sets = sets;
         this.isRepetition = isRepetition;
         this.time = time;

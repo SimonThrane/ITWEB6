@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ITWEB6.Models;
 using ITWEB6.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITWEB6.Controllers
 {
   [Produces("application/json")]
   [Route("api/Exercises")]
+  [Authorize]
   public class ExercisesController : Controller
   {
     private readonly FitnessBoysContext _context;

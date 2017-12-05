@@ -15,5 +15,13 @@ namespace ITWEB6.Models
         public DateTime CreateDate { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
-    }
+        public List<Activity> Activities { get; set; }
+
+      public Program()
+      {
+        ProgramExercises = new List<ProgramExercise>();
+        Activities = new List<Activity>();
+      }
+
+  }
 }

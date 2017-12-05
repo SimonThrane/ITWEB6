@@ -86,7 +86,7 @@ export class FitnessService {
   }
 
   logActivity(activity: Activity): Observable<any>{
-    const url = this.baseUrl + this.programsUrl + "/logactivity";  
+    const url = this.baseUrl + "Activities";  
     return this.http
     .post<Activity>(url, JSON.stringify(activity), { headers: this.auhtHeader })
     .first();

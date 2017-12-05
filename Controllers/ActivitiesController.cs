@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ITWEB6.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITWEB6.Controllers
 {
     [Produces("application/json")]
     [Route("api/Activities")]
+    [Authorize]
     public class ActivitiesController : Controller
     {
         private readonly FitnessBoysContext _context;
@@ -85,12 +87,21 @@ namespace ITWEB6.Controllers
         [HttpPost]
         public async Task<IActionResult> PostActivity([FromBody] Activity activity)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+          if (!ModelState.IsValid)
+          {
+            return BadRequest(ModelState);
+          }
+          var program = _context.Programs.SingleOrDefault(o => o.Id == activity.Program.Id);
+          activity.ProgramId = activity.Program.Id;
+      //activity.Program.Activities = new List<Activity>();
+      //activity.Program.Activities.Add(activity);
+      activity.Program = program;
+      //if(!program.Activities.Exists())
+      //  program.Activities = new List<Activity>();
 
-            _context.Activities.Add(activity);
+        program.Activities.Add(activity);
+        //_context.Activities.Add(activity);
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);

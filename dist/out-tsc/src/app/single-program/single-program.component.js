@@ -22,6 +22,7 @@ var SingleProgramComponent = (function () {
         this.routingSubscription = this.route.params.subscribe(function (params) {
             _this.programId = params.id;
             _this.programSubscription = _this.fitnessService.getProgram(_this.programId).subscribe(function (program) {
+                //console.log(program);
                 _this.program = program;
             });
         });
@@ -34,10 +35,9 @@ var SingleProgramComponent = (function () {
     SingleProgramComponent.prototype.addExerciseToProgram = function (exercise) {
         var _this = this;
         var mappedProgram = JSON.parse(JSON.stringify(this.program));
-        mappedProgram.exercises = this.program.exercises.map(function (exercise) { return exercise._id; });
-        mappedProgram.exercises.push(String(exercise._id));
+        mappedProgram.exercises = [exercise.id];
         this.fitnessService.updateProgram(mappedProgram).subscribe(function (data) {
-            if (_this.program.exercises.filter(function (e) { return e._id === exercise._id; }).length === 0) {
+            if (_this.program.exercises.filter(function (e) { return e.id === exercise.id; }).length === 0) {
                 _this.program.exercises.push(exercise);
             }
         });

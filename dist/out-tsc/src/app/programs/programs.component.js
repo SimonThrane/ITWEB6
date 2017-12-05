@@ -32,8 +32,8 @@ var ProgramsComponent = (function () {
     };
     ProgramsComponent.prototype.deleteProgram = function (program) {
         var _this = this;
-        this.fitnessService.deleteProgram(program._id).subscribe(function (data) {
-            var index = _this.programs.indexOf(program._id);
+        this.fitnessService.deleteProgram(program.id).subscribe(function (data) {
+            var index = _this.programs.indexOf(program.id);
             _this.programs.splice(index, 1);
         });
     };
